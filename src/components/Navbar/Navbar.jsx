@@ -1,5 +1,5 @@
 import './Navbar.css';
-import sacola from '../../assets/icon/sacola.svg';
+import caldeirao from '../../assets/icon/caldeirao.svg';
 import logo from '../../assets/icon/logo.svg';
 
 export function Navbar() {
@@ -11,7 +11,7 @@ export function Navbar() {
       <div className="Header__opcoes Opcoes">
         <div className="Opcoes__sacola Sacola">
           <img
-            src={sacola}
+            src={caldeirao}
             width="40px"
             className="Sacola__icone"
             alt="Sacola de compras"
