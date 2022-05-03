@@ -4,7 +4,7 @@
   min-height: 200px;
   max-width: 700px;
   max-height: 450px;
-  background: #eccf8d;
+  background: #cb4e47;
   position: relative;
   border-radius: 10px;
   box-sizing: border-box;
@@ -17,7 +17,7 @@
   width: 30px;
   height: 30px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   top: 20px;
   right: 20px;

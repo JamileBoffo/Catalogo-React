@@ -1,6 +1,6 @@
 .PotionDetalhesModal {
   font-family: "Exo";
-  background: #b49b5f;
+  background: #ff8976;
   border-radius: 10px;
   padding: 10px 0px 10px 10px;
   max-height: 350px;
@@ -28,7 +28,7 @@
 }
 
 .PotionDetalhesModal__valor {
-  color: #ac2005;
+  color: #760504;
   font-size: 2em;
 }
 

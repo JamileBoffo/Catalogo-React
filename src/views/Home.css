@@ -2,8 +2,8 @@
   position: relative;
   background-image: radial-gradient(
     farthest-corner at 40px 40px,
-    #397056 60%,
-    #26503c 100%
+    #b12b24 60%,
+    #760504 100%
   );
   min-height: calc(100vh - 60px);
   margin: 15px;

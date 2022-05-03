@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
+import './AdicionarPotionModal.css'
 import { PotionService } from "../../services/PotionService";
 
 function AdicionaPotionModal({ closeModal }) {
@@ -38,19 +39,6 @@ function AdicionaPotionModal({ closeModal }) {
         <form autoComplete="off">
           <h2> Adicionar ao Catálogo </h2>
           <div>
-            <label className="AdicionaPotionModal__text" htmlFor="valor">
-              {" "}
-              Valor:{" "}
-            </label>
-            <input
-              id="valor"
-              placeholder="10,00"
-              type="text"
-              value={state.valor}
-              onChange={(e) => handleChange(e, "valor")}
-            />
-          </div>
-          <div>
             <label className="AdicionaPotionModal__text" htmlFor="nome">
               {" "}
               Nome:{" "}
@@ -61,6 +49,19 @@ function AdicionaPotionModal({ closeModal }) {
               type="text"
               value={state.nome}
               onChange={(e) => handleChange(e, "nome")}
+            />
+          </div>
+          <div>
+            <label className="AdicionaPotionModal__text" htmlFor="valor">
+              {" "}
+              Valor:{" "}
+            </label>
+            <input
+              id="valor"
+              placeholder="10,00"
+              type="text"
+              value={state.valor}
+              onChange={(e) => handleChange(e, "valor")}
             />
           </div>
           <div>

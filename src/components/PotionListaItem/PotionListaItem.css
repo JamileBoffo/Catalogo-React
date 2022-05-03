@@ -1,12 +1,9 @@
-
-
-
 .PotionListaItem {
   font-family: 'Exo';
-  background: #84b295;
+  background: #fbdc6a;
   border-radius: 10px;
   padding: 10px;
-  width: 350px;
+  width: 315px;
   display: flex;
   position: relative;
   justify-content: space-around;
@@ -21,7 +18,7 @@
 }
 
 .PotionListaItem__badge {
-  background-color: #eccf8d;
+  background-color: #ffffff;
   width: 20px;
   height: 20px;
   text-align: center;
@@ -53,7 +50,7 @@
   font-size: 0.85em;
 }
 .PotionListaItem__valor {
-  color: #ac2005;
+  color: #b12b24;
 }
 .PotionListaItem__img {
   height: 150px;
@@ -69,7 +66,7 @@
 .Acoes__adicionar,
 .Acoes__remover {
   border: none;
-  color: #2c1507;
+  color: #090a0e;
   border-radius: 5px;
   font-family: 'Exo', sans-serif;
   padding: 5px;
@@ -82,11 +79,11 @@
 }
 
 .Acoes__remover {
-  background-color: #ac2005;
+  background-color: #760504;
 }
 
 .Acoes__adicionar {
-  background-color: #eccf8d;
+  background-color: #e6af30;
 }
 
 .Acoes__adicionar--preencher {
