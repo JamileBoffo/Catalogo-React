@@ -1,8 +1,8 @@
-import { children } from "react";
+import children from "react";
 import Overlay from '../Overlay/Overlay'
 import "./Modal.css";
 
-export function Modal({ children, closeModal }) {
+function Modal({ children, closeModal }) {
   const handleClick = (e, canClose) => {
     // impedir a propagação do evento para seus ouvintes
     e.stopPropagation();
@@ -20,3 +20,5 @@ export function Modal({ children, closeModal }) {
     </Overlay>
   );
 }
+
+export default Modal;

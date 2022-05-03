@@ -1,5 +1,5 @@
 import "./Home.css";
-import { PotionLista } from "../components/PotionLista/PotionLista";
+import PotionLista from "../components/PotionLista/PotionLista";
 import Navbar from "../components/Navbar/Navbar";
 import { useState } from "react";
 import AdicionaPotionModal from "../components/AdicionarPotionModal/AdicionarPotionModal";

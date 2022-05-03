@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Modal } from "../modal/Modal";
+import Modal from "../modal/Modal";
 import { PotionService } from "../../services/PotionService";
 
 function AdicionaPotionModal({ closeModal }) {

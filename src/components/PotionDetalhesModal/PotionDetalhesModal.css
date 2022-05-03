@@ -1,0 +1,64 @@
+.PotionDetalhesModal {
+  font-family: "Exo";
+  background: #b49b5f;
+  border-radius: 10px;
+  padding: 10px 0px 10px 10px;
+  max-height: 350px;
+  box-sizing: border-box;
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.PotionDetalhesModal > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.PotionDetalhesModal__nome {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.PotionDetalhesModal__descricao {
+  font-size: 1em;
+}
+
+.PotionDetalhesModal__valor {
+  color: #ac2005;
+  font-size: 2em;
+}
+
+.PotionDetalhesModal__img {
+  height: 200px;
+  margin-right: -60px;
+  z-index: 0;
+}
+
+@media (max-width: 400px) {
+  .PotionDetalhesModal {
+    width: 210px;
+    height: 100vh;
+  }
+
+  .PotionDetalhesModal__img {
+    height: 50px;
+    margin-top: 50px;
+    margin-right: -100px;
+  }
+
+  .PotionDetalhesModal__valor {
+    font-size: 2em;
+  }
+
+  .PotionDetalhesModal__nome {
+    font-size: 1.5em;
+  }
+
+  .PotionDetalhesModal__descricao {
+    font-size: 0.9em;
+  }
+}

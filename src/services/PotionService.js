@@ -2,26 +2,13 @@ import { Api } from "../helpers/Api";
 //pegar resposta e converter p json
 const parseResponse = (response) => response.json();
 
-const transformPotion = (potion) => {
-  return {
-    ...potion,
-    id: potion._id,
-  };
-};
-
-const parseTransformLista = (response) =>
-  parseResponse(response).then((potions) => potions.map(transformPotion));
-
-const parseTransformItem = (response) =>
-  parseResponse(response).then(transformPotion);
-
 export const PotionService = {
   // modelo fetch(url, {metodo}).then
   getLista: () =>
     fetch(Api.potionLista(), { method: "GET" }).then(parseTransformLista),
 
   getById: (id) =>
-    fetch(Api.potionById(), { method: "GET" }).then(parseTransformItem),
+    fetch(Api.potionById(id), { method: "GET" }).then(parseTransformItem),
 
   create: (potion) =>
     fetch(Api.createPotion(), { 
@@ -37,3 +24,16 @@ export const PotionService = {
   delete: (id) =>
     fetch(Api.deletePotionById(), { method: "DELETE" }).then(parseResponse),
 };
+
+const transformPotion = (potion) => {
+  return {
+    ...potion,
+    id: potion._id,
+  };
+};
+
+const parseTransformLista = (response) =>
+  parseResponse(response).then((potions) => potions.map(transformPotion));
+
+const parseTransformItem = (response) =>
+  parseResponse(response).then(transformPotion);

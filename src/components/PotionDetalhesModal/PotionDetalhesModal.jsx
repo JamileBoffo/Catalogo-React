@@ -1,5 +1,5 @@
 import "./PotionDetalhesModal.css";
-import {Modal} from "../modal/Modal";
+import Modal from "../modal/Modal";
 
 function PotionDetalhesModal({ potion, closeModal }) {
   return (
@@ -9,10 +9,11 @@ function PotionDetalhesModal({ potion, closeModal }) {
           <div className="PotionDetalhesModal__nome"> {potion.nome} </div>
           <div className="PotionDetalhesModal__valor">
             {" "}
-            R$ {Number(potion.valor).toFixed(2)}{" "}
+            ʛ {Number(potion.valor).toFixed(2)}{" "}
           </div>
           <div className="PotionaDetalhesModal__descricao">
             {" "}
+            <b>Nome:</b> {potion.nome}{" "}
           </div>
           <div className="PotionDetalhesModal__descricao">
             {" "}

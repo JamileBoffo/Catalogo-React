@@ -1,14 +1,15 @@
 import "./Navbar.css";
 import caldeirao from "../../assets/icon/caldeirao.svg";
-import logo from "../../assets/icon/logo.svg";
-import paleta from "../../assets/icon/paleta.svg";
+import dragon from "../../assets/icon/dragon.svg";
+import adicionar from "../../assets/icon/adicionar.svg";
 
 function Navbar({ createPotion }) {
   return (
     <div className="Header">
       <div className="row">
         <div className="Header__logo Logo">
-          <img src={logo} width="40px" className="Sacola__icone" alt="sacola" />
+          <img src={dragon} width="40px" className="Logo__icone" alt="Logo RedDragon" />
+          <span className="Logo__titulo"> RedDragon </span>
         </div>
         <div className="Header__opcoes Opcoes">
           <button
@@ -17,7 +18,7 @@ function Navbar({ createPotion }) {
             onClick={() => createPotion()}
           >
             <img
-              src={paleta}
+              src={adicionar}
               width="40px"
               className="Potion__icone"
               alt="Adiconar poção"
