@@ -1,23 +1,34 @@
-import './PotionListaItem.css';
+import "./PotionListaItem.css";
 
-export function PotionListaItem({ potion, quantidadeSelecionada, index, onRemove, onAdd }) {
+export function PotionListaItem({
+  potion,
+  quantidadeSelecionada,
+  index,
+  onRemove,
+  onAdd,
+  clickItem,
+}) {
 
-  const badgeCounter = (canRender, index) =>
-    Boolean(canRender) && (
-      <span className="PotionListaItem__badge">{+quantidadeSelecionada}</span>
-    );
 
   const removeButton = (canRender, index) =>
     Boolean(canRender) && (
-      <button className="Acoes__remover" onClick={() => onRemove(index)}>
+      <button className="Acoes__remover" onClick={(e) => {
+        e.stopPropagation();
+        onRemove(index);
+      }}>
         Remover
       </button>
     );
 
+  const badgeCounter = (canRender) =>
+    Boolean(canRender) && (
+      <span className="PotionListaItem__badge">{+quantidadeSelecionada}</span>
+    );
+
   return (
-    <div className="PotionListaItem" key={`PotionListaItem-${index}`}>
+    <div className="PotionListaItem" key={`PotionListaItem-${index}`}onClick={() => clickItem(potion.id)}>
       {badgeCounter(+quantidadeSelecionada, index)}
-      
+
       <div>
         <div className="PotionListaItem__nome">{potion.nome}</div>
         <div className="PotionListaItem__valor">ʛ {potion.valor}</div>
@@ -25,16 +36,22 @@ export function PotionListaItem({ potion, quantidadeSelecionada, index, onRemove
         <div className="PotionListaItem__acoes Acoes">
           <button
             className={`Acoes__adicionar ${
-              !quantidadeSelecionada[index] && 'acoes__adicionar--preencher'
+              !quantidadeSelecionada && "acoes__adicionar--preencher"
             }`}
-            onClick={() => onAdd(index)}
+            onClick={(e) => {e.stopPropagation();
+              onAdd(index);
+            }}
           >
             Adicionar
           </button>
           {removeButton(+quantidadeSelecionada, index)}
         </div>
       </div>
-      <img className="PotionListaItem__img" src={potion.img} alt={potion.nome} />
+      <img
+        className="PotionListaItem__img"
+        src={potion.img}
+        alt={potion.nome}
+      />
     </div>
   );
 }

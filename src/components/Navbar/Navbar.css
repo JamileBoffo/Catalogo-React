@@ -63,11 +63,19 @@
   .Header {
     max-width: 720px;
   }
+
+  
 }
 
 @media (max-width: 840px) {
   .Header {
     max-width: 320px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
   }
 }
 
@@ -76,6 +84,10 @@
     max-width: 250px;
   }
 
+  .Logo {
+    width: 100%;
+  }
+  
   .row {
     column-gap: 20px;
   }
@@ -83,4 +95,17 @@
   .Logo__titulo {
     font-size: 1.5em;
   }
+}
+
+.Opcoes {
+  display: flex;
+}
+
+.Potion {
+  background: none;
+  border: none;
+}
+
+.Potion__icone {
+  cursor: pointer;
 }
