@@ -3,7 +3,7 @@ import Modal from "../modal/Modal";
 import './AdicionarPotionModal.css'
 import { PotionService } from "../../services/PotionService";
 
-function AdicionaPotionModal({ closeModal }) {
+function AdicionaPotionModal({ closeModal, onCreatePotion }) {
   const form = {
     valor: "",
     nome: "",
@@ -32,6 +32,23 @@ function AdicionaPotionModal({ closeModal }) {
   useEffect(() => {
     canDisableSendButton();
   });
+
+  const createPotion = async () => {
+    const renomeiaCaminhoImg = (imgPath) => imgPath.split('\\').pop();
+
+    const { nome, descricao, valor, img } = state;
+
+    const potion = {
+        nome,
+        descricao,
+        valor,
+        img: `assets/img/${renomeiaCaminhoImg(img)}`
+    }
+
+    const response = await PotionService.create(potion);
+    onCreatePotion(response);
+    closeModal();
+}
 
   return (
     <Modal closeModal={closeModal}>
@@ -90,6 +107,7 @@ function AdicionaPotionModal({ closeModal }) {
               type="file"
               accept="image/png, image/gif, image/jpeg"
               value={state.img}
+              required
               onChange={(e) => handleChange(e, "img")}
             />
           </div>
@@ -98,6 +116,7 @@ function AdicionaPotionModal({ closeModal }) {
             className="AdicionaPotionModal__enviar"
             type="submit"
             disabled={canDisable}
+            onClick={createPotion}
           >Enviar</button>
         </form>
       </div>

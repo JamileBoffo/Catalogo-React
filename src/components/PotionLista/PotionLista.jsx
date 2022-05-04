@@ -1,10 +1,10 @@
 import './PotionLista.css';
 import { PotionService }  from '../../services/PotionService';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {PotionListaItem} from '../PotionListaItem/PotionListaItem';
 import PotionDetalhesModal from '../PotionDetalhesModal/PotionDetalhesModal';
 
-function PotionLista() {
+function PotionLista({potionCriada}) {
   const [potions, setPotions] = useState([]);
   const [potionSelecionada, setPotionSelecionada] = useState({});
   const [potionModal, setPotionModal] = useState(false)
@@ -28,6 +28,15 @@ function PotionLista() {
     const response = await PotionService.getById(id);
     setPotionModal(response);
   }
+
+  const adicionaPotionNaLista = (potion) => {
+    const lista = [...potions, potion];
+    setPotions(lista);
+  }
+
+  useEffect(() => {
+    if (potionCriada) adicionaPotionNaLista(potionCriada);
+  }, [potionCriada]);
   //após renderizar, chamar a função
   useEffect(() => {
     getLista();
