@@ -11,15 +11,22 @@ export const PotionService = {
     fetch(Api.potionById(id), { method: "GET" }).then(parseTransformItem),
 
   create: (potion) =>
-    fetch(Api.createPotion(), { 
-      method: "POST", 
-      body: JSON.stringify(potion), 
-      mode: "cors", 
-      headers: {"Content-Type":"application/json"}
+    fetch(Api.createPotion(), {
+      method: "POST",
+      body: JSON.stringify(potion),
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
     }).then(parseResponse),
 
-  update: (id) =>
-    fetch(Api.updatePotionById(), { method: "PUT" }).then(parseResponse),
+  updtateById: (id, potion) =>
+    fetch(Api.updatePotionById(id), {
+      method: "PUT",
+      body: JSON.stringify(potion),
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(parseResponse),
 
   delete: (id) =>
     fetch(Api.deletePotionById(), { method: "DELETE" }).then(parseResponse),

@@ -1,4 +1,5 @@
 import "./PotionListaItem.css";
+import { ActionMode } from "../../constants";
 
 export function PotionListaItem({
   potion,
@@ -7,15 +8,18 @@ export function PotionListaItem({
   onRemove,
   onAdd,
   clickItem,
+  mode,
 }) {
-
-
   const removeButton = (canRender, index) =>
     Boolean(canRender) && (
-      <button className="Acoes__remover" onClick={(e) => {
-        e.stopPropagation();
-        onRemove(index);
-      }}>
+      <button
+        disabled={mode !== ActionMode.NORMAL}
+        className="Acoes__remover"
+        onClick={(e) => {
+          e.stopPropagation();
+          onRemove(index);
+        }}
+      >
         Remover
       </button>
     );
@@ -25,20 +29,31 @@ export function PotionListaItem({
       <span className="PotionListaItem__badge">{+quantidadeSelecionada}</span>
     );
 
-  return (
-    <div className="PotionListaItem" key={`PotionListaItem-${index}`}onClick={() => clickItem(potion.id)}>
-      {badgeCounter(+quantidadeSelecionada, index)}
+  const badgeAction = (canRender) => {
+    if (canRender)
+      return <span className="PotionListaItem__tag"> {mode} </span>;
+  };
 
+  return (
+    <div
+      className="PotionListaItem"
+      key={`PotionListaItem-${index}`}
+      onClick={() => clickItem(potion.id)}
+    >
+      {badgeCounter(+quantidadeSelecionada, index)}
+      {badgeAction(mode !== ActionMode.NORMAL)}
       <div>
         <div className="PotionListaItem__nome">{potion.nome}</div>
         <div className="PotionListaItem__valor">ʛ {potion.valor}</div>
         <div className="PotionListaItem__descricao">{potion.descricao}</div>
         <div className="PotionListaItem__acoes Acoes">
           <button
-            className={`Acoes__adicionar ${
+            disabled = {mode !== ActionMode.NORMAL}
+            className = {`Acoes__adicionar ${
               !quantidadeSelecionada && "acoes__adicionar--preencher"
             }`}
-            onClick={(e) => {e.stopPropagation();
+            onClick={(e) => {
+              e.stopPropagation();
               onAdd(index);
             }}
           >

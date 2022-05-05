@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
-import './AdicionarPotionModal.css'
+import "./AdicionaEditaPotionModal.css";
 import { PotionService } from "../../services/PotionService";
+import { ActionMode } from '../../constants/index'
 
-function AdicionaPotionModal({ closeModal, onCreatePotion }) {
+function AdicionaEditaPotionModal({ 
+  closeModal, 
+  onCreatePotion, 
+  mode, 
+  potionToUpdate, 
+  onUpdatePotion 
+}) {
   const form = {
-    valor: "",
-    nome: "",
-    descricao: "",
-    img: "",
+    valor: potionToUpdate?.valor ?? "",
+    nome: potionToUpdate?.nome ?? "",
+    descricao: potionToUpdate?.descricao ?? "",
+    img: potionToUpdate?.img ?? "",
   };
 
   const [state, setState] = useState(form);
@@ -19,7 +26,7 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
       state.descricao.length &&
         state.img.length &&
         state.nome.length &&
-        state.valor.length
+        String(state.valor).length
     );
 
     setCanDisable(response);
@@ -33,28 +40,52 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
     canDisableSendButton();
   });
 
-  const createPotion = async () => {
-    const renomeiaCaminhoImg = (imgPath) => imgPath.split('\\').pop();
+  const handleSend = async () => {
+    const renomeiaCaminhoImg = (imgPath) => imgPath.split("\\").pop();
 
     const { nome, descricao, valor, img } = state;
 
     const potion = {
-        nome,
-        descricao,
-        valor,
-        img: `assets/img/${renomeiaCaminhoImg(img)}`
+      ...(potionToUpdate && { _id: potionToUpdate?.id}),
+      nome,
+      descricao,
+      valor,
+      img: `./assets/img/${renomeiaCaminhoImg(img)}`,
+    };
+
+    const serviceCall = {
+      [ActionMode.NORMAL]: () => PotionService.create(potion) ,
+      [ActionMode.ATUALIZAR]: () => PotionService.updtateById(potionToUpdate?.id, potion),
     }
 
-    const response = await PotionService.create(potion);
-    onCreatePotion(response);
+    const response = await serviceCall[mode]();
+
+    const actionResponse = {
+      [ActionMode.NORMAL]: () => onCreatePotion(response),
+      [ActionMode.ATUALIZAR]: () => onUpdatePotion(response),
+    }
+
+    actionResponse[mode]();
+
+    const reset = {
+      valor: "",
+      nome: "",
+      descricao: "",
+      img: ""
+    };
+
+    setState(reset)
+
     closeModal();
-}
+  };
+
+  
 
   return (
     <Modal closeModal={closeModal}>
       <div className="AdicionaPotionModal">
         <form autoComplete="off">
-          <h2> Adicionar ao Catálogo </h2>
+          <h2> {ActionMode.ATUALIZAR === mode ? 'Atualizar' : 'Adicionar ao' } {""} Catálogo </h2>
           <div>
             <label className="AdicionaPotionModal__text" htmlFor="nome">
               {" "}
@@ -65,6 +96,7 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
               placeholder="Amortentia"
               type="text"
               value={state.nome}
+              required
               onChange={(e) => handleChange(e, "nome")}
             />
           </div>
@@ -78,6 +110,7 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
               placeholder="10,00"
               type="text"
               value={state.valor}
+              required
               onChange={(e) => handleChange(e, "valor")}
             />
           </div>
@@ -91,6 +124,7 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
               placeholder="Detalhe o produto"
               type="text"
               value={state.descricao}
+              required
               onChange={(e) => handleChange(e, "descricao")}
             />
           </div>
@@ -106,7 +140,6 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
               id="img"
               type="file"
               accept="image/png, image/gif, image/jpeg"
-              value={state.img}
               required
               onChange={(e) => handleChange(e, "img")}
             />
@@ -116,12 +149,14 @@ function AdicionaPotionModal({ closeModal, onCreatePotion }) {
             className="AdicionaPotionModal__enviar"
             type="submit"
             disabled={canDisable}
-            onClick={createPotion}
-          >Enviar</button>
+            onClick={handleSend}
+          >
+            {ActionMode.NORMAL === mode ? 'Enviar' : 'Atualizar'}
+          </button>
         </form>
       </div>
     </Modal>
   );
 }
 
-export default AdicionaPotionModal;
+export default AdicionaEditaPotionModal;

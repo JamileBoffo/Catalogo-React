@@ -2,16 +2,37 @@ import "./Navbar.css";
 import caldeirao from "../../assets/icon/caldeirao.svg";
 import dragon from "../../assets/icon/dragon.svg";
 import adicionar from "../../assets/icon/adicionar.svg";
+import atualizar from "../../assets/icon/atualizar.svg";
+import { ActionMode } from "../../constants/index"
 
-function Navbar({ createPotion }) {
+function Navbar({ mode, createPotion, updatePotion }) {
   return (
     <div className="Header">
       <div className="row">
         <div className="Header__logo Logo">
-          <img src={dragon} width="40px" className="Logo__icone" alt="Logo RedDragon" />
+          <img
+            src={dragon}
+            width="40px"
+            className="Logo__icone"
+            alt="Logo RedDragon"
+          />
           <span className="Logo__titulo"> RedDragon </span>
         </div>
         <div className="Header__opcoes Opcoes">
+          <button
+            type="button"
+            className={`Opcoes__potion Potion ${
+              mode === ActionMode.ATUALIZAR && "Potion--ativa"
+            }`}
+            onClick={() => updatePotion()}
+          >
+            <img
+              src={atualizar}
+              width="40px"
+              className="Potion__icone"
+              alt="Editar poção"
+            />
+          </button>
           <button
             type="button"
             className="Opcoes__potion Potion"
