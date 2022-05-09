@@ -5,16 +5,18 @@ import { PotionListaItem } from "../PotionListaItem/PotionListaItem";
 import PotionDetalhesModal from "../PotionDetalhesModal/PotionDetalhesModal";
 import { ActionMode } from "../../constants/index";
 
-function PotionLista({ 
-  potionCriada, 
-  mode, 
-  updatePotion, 
-  deletePotion, 
-  potionEditada, 
-  potionRemovida 
+function PotionLista({
+  potionCriada,
+  mode,
+  updatePotion,
+  deletePotion,
+  potionEditada,
+  potionRemovida,
 }) {
+  const selecionadas = JSON.parse(localStorage.getItem("selecionadas")) ?? {};
+
   const [potions, setPotions] = useState([]);
-  const [potionSelecionada, setPotionSelecionada] = useState({});
+  const [potionSelecionada, setPotionSelecionada] = useState(selecionadas);
   const [potionModal, setPotionModal] = useState(false);
 
   const onAdd = (potionIndex) => {
@@ -30,6 +32,19 @@ function PotionLista({
     };
     setPotionSelecionada({ ...potionSelecionada, ...potion });
   };
+
+  const setSelecionadas = useCallback(() => {
+    if(!potions.length) return;
+
+    const entries = Object.entries(potionSelecionada);
+    const sacola = entries.map(arr => ({
+      potionId: potions[arr[0]].id,
+      quantidade: arr[1]
+    }))
+
+    localStorage.setItem('sacola', JSON.stringify(sacola))
+    localStorage.setItem('selecionadas', JSON.stringify(potionSelecionada))
+  }, [potionSelecionada, potions]);
 
   const getLista = async () => {
     const response = await PotionService.getLista();
@@ -50,10 +65,15 @@ function PotionLista({
     (potion) => {
       const lista = [...potions, potion];
       setPotions(lista);
-  }, [potions]);
+    },
+    [potions]
+  );
 
   useEffect(() => {
-    if (potionCriada && !potions.map(({ id }) => id).includes(potionCriada.id)) {
+    if (
+      potionCriada &&
+      !potions.map(({ id }) => id).includes(potionCriada.id)
+    ) {
       adicionaPotionNaLista(potionCriada);
     }
   }, [adicionaPotionNaLista, potionCriada, potions]);
@@ -61,8 +81,11 @@ function PotionLista({
   //após renderizar, chamar a função
   useEffect(() => {
     getLista();
-  }, [potionEditada]);
+  }, [potionEditada, potionRemovida]);
 
+  useEffect(() => {
+    setSelecionadas()
+  }, [setSelecionadas, potionSelecionada])
   return (
     <div className="PotionLista">
       {potions.map((potion, index) => (

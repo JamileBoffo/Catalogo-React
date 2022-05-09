@@ -116,5 +116,9 @@
 }
 
 .Potion--ativa {
-  background: rgba(148, 0, 211);
+  background: #e6af30;
+}
+
+.Potion--deletar {
+  background: #760504;
 }

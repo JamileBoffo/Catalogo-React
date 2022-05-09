@@ -3,9 +3,10 @@ import caldeirao from "../../assets/icon/caldeirao.svg";
 import dragon from "../../assets/icon/dragon.svg";
 import adicionar from "../../assets/icon/adicionar.svg";
 import atualizar from "../../assets/icon/atualizar.svg";
-import { ActionMode } from "../../constants/index"
+import deletar from "../../assets/icon/deletar.svg";
+import { ActionMode } from "../../constants/index";
 
-function Navbar({ mode, createPotion, updatePotion }) {
+function Navbar({ mode, createPotion, updatePotion, deletePotion, openBag }) {
   return (
     <div className="Header">
       <div className="row">
@@ -33,6 +34,21 @@ function Navbar({ mode, createPotion, updatePotion }) {
               alt="Editar poção"
             />
           </button>
+
+          <button
+            type="button"
+            className={`Opcoes__potion Potion ${
+              mode === ActionMode.DELETAR && "Potion--deletar"
+            }`}
+            onClick={() => deletePotion()}
+          >
+            <img
+              src={deletar}
+              width="40px"
+              className="Potion__icone"
+              alt="Deletar poção"
+            />
+          </button>
           <button
             type="button"
             className="Opcoes__potion Potion"
@@ -45,7 +61,7 @@ function Navbar({ mode, createPotion, updatePotion }) {
               alt="Adiconar poção"
             />
           </button>
-          <div className="Opcoes__sacola Sacola">
+          <div className="Opcoes__sacola Sacola" onClick={openBag}>
             <img
               src={caldeirao}
               width="40px"

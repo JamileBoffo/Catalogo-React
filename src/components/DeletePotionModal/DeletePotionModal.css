@@ -1,0 +1,39 @@
+.DeletaPotionModal {
+  margin-top: -20px;
+}
+
+.DeletaPotionModal > div {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.DeletaPotionModal__img {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  width: 80px;
+}
+
+.DeletaPotionModal__confirmar,
+.DeletaPotionModal__cancelar {
+  border: none;
+  border-radius: 5px;
+  font-family: "Exo", sans-serif;
+  padding: 5px;
+  max-width: 280px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 48%;
+  color: white;
+}
+
+.DeletaPotionModal__confirmar {
+  background-color: #e6af30;
+}
+
+.DeletaPotionModal__cancelar {
+  background-color: #760504;
+}

@@ -15,7 +15,14 @@ const PotionContext = {
     `${PotionContext.potionEndpoint()}/delete-potion/${id}`,
 };
 
+const SacolaContext = {
+  getSacola: () => `${PotionContext.potionEndpoint()}/all-carrinho`,
+  createSacola: () => `${PotionContext.potionEndpoint()}/create-carrinho`,
+  purchase: () => `${PotionContext.potionEndpoint()}/finish-carrinho`,
+}
+
 export const Api = {
   baseUrl: "http://localhost:3333",
   ...PotionContext,
+  ...SacolaContext
 };

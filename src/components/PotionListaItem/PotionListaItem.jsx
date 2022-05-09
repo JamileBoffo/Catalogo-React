@@ -31,12 +31,24 @@ export function PotionListaItem({
 
   const badgeAction = (canRender) => {
     if (canRender)
-      return <span className="PotionListaItem__tag"> {mode} </span>;
+      return (
+        <span
+          className={`PotionListaItem__tag ${
+            mode === ActionMode.DELETAR && "PotionListaItem__tag--deletar"
+          }`}
+        >
+          {" "}
+          {mode}{" "}
+        </span>
+      );
   };
 
   return (
     <div
-      className="PotionListaItem"
+      className={`
+      PotionListaItem
+      ${mode !== ActionMode.NORMAL && "PotionListaItem--disable"}
+      ${mode === ActionMode.DELETAR && "PotionListaItem--deletar"}`}
       key={`PotionListaItem-${index}`}
       onClick={() => clickItem(potion.id)}
     >
@@ -48,8 +60,8 @@ export function PotionListaItem({
         <div className="PotionListaItem__descricao">{potion.descricao}</div>
         <div className="PotionListaItem__acoes Acoes">
           <button
-            disabled = {mode !== ActionMode.NORMAL}
-            className = {`Acoes__adicionar ${
+            disabled={mode !== ActionMode.NORMAL}
+            className={`Acoes__adicionar ${
               !quantidadeSelecionada && "acoes__adicionar--preencher"
             }`}
             onClick={(e) => {
