@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import "./AdicionaEditaPotionModal.css";
 import { PotionService } from "../../services/PotionService";
-import { ActionMode } from '../../constants/index'
+import { ActionMode } from "../../constants/index";
 
-function AdicionaEditaPotionModal({ 
-  closeModal, 
-  onCreatePotion, 
-  mode, 
-  potionToUpdate, 
-  onUpdatePotion 
+function AdicionaEditaPotionModal({
+  closeModal,
+  onCreatePotion,
+  mode,
+  potionToUpdate,
+  onUpdatePotion,
 }) {
   const form = {
-    valor: potionToUpdate?.valor ?? "",
-    nome: potionToUpdate?.nome ?? "",
-    descricao: potionToUpdate?.descricao ?? "",
-    img: potionToUpdate?.img ?? "",
+    valor: potionToUpdate?.valor ?? '',
+    nome: potionToUpdate?.nome ?? '',
+    descricao: potionToUpdate?.descricao ?? '',
+    img: potionToUpdate?.img ?? '',
   };
 
   const [state, setState] = useState(form);
@@ -36,17 +36,14 @@ function AdicionaEditaPotionModal({
     setState({ ...state, [name]: e.target.value });
   };
 
-  useEffect(() => {
-    canDisableSendButton();
-  });
-
+  
   const handleSend = async () => {
     const renomeiaCaminhoImg = (imgPath) => imgPath.split("\\").pop();
 
     const { nome, descricao, valor, img } = state;
 
     const potion = {
-      ...(potionToUpdate && { _id: potionToUpdate?.id}),
+      ...(potionToUpdate && { _id: potionToUpdate?.id }),
       nome,
       descricao,
       valor,
@@ -54,16 +51,17 @@ function AdicionaEditaPotionModal({
     };
 
     const serviceCall = {
-      [ActionMode.NORMAL]: () => PotionService.create(potion) ,
-      [ActionMode.ATUALIZAR]: () => PotionService.updtateById(potionToUpdate?.id, potion),
-    }
+      [ActionMode.NORMAL]: () => PotionService.create(potion),
+      [ActionMode.ATUALIZAR]: () =>
+        PotionService.updtateById(potionToUpdate?.id, potion),
+    };
 
     const response = await serviceCall[mode]();
 
     const actionResponse = {
       [ActionMode.NORMAL]: () => onCreatePotion(response),
       [ActionMode.ATUALIZAR]: () => onUpdatePotion(response),
-    }
+    };
 
     actionResponse[mode]();
 
@@ -71,21 +69,27 @@ function AdicionaEditaPotionModal({
       valor: "",
       nome: "",
       descricao: "",
-      img: ""
+      img: "",
     };
 
-    setState(reset)
+    setState(reset);
 
     closeModal();
   };
 
-  
+  useEffect(() => {
+    canDisableSendButton();
+  });
 
   return (
     <Modal closeModal={closeModal}>
       <div className="AdicionaPotionModal">
         <form autoComplete="off">
-          <h2> {ActionMode.ATUALIZAR === mode ? 'Atualizar' : 'Adicionar ao' } {""} Catálogo </h2>
+          <h2>
+            {" "}
+            {ActionMode.ATUALIZAR === mode ? "Atualizar" : "Adicionar ao"} {""}{" "}
+            Catálogo{" "}
+          </h2>
           <div>
             <label className="AdicionaPotionModal__text" htmlFor="nome">
               {" "}
@@ -93,7 +97,7 @@ function AdicionaEditaPotionModal({
             </label>
             <input
               id="nome"
-              placeholder="Amortentia"
+              placeholder="Poção Amortentia"
               type="text"
               value={state.nome}
               required
@@ -151,7 +155,7 @@ function AdicionaEditaPotionModal({
             disabled={canDisable}
             onClick={handleSend}
           >
-            {ActionMode.NORMAL === mode ? 'Enviar' : 'Atualizar'}
+            {ActionMode.NORMAL === mode ? "Enviar" : "Atualizar"}
           </button>
         </form>
       </div>

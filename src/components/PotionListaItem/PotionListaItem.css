@@ -1,5 +1,5 @@
 .PotionListaItem {
-  font-family: 'Exo';
+  font-family: "Exo";
   background: #fbdc6a;
   border-radius: 10px;
   padding: 10px;
@@ -100,7 +100,7 @@
   border: none;
   color: #090a0e;
   border-radius: 5px;
-  font-family: 'Exo', sans-serif;
+  font-family: "Exo", sans-serif;
   padding: 5px;
   max-width: 280px;
   text-align: center;
@@ -121,5 +121,3 @@
 .Acoes__adicionar--preencher {
   width: 100%;
 }
-
-

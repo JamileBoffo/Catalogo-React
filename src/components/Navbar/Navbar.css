@@ -23,7 +23,7 @@
 .Logo__titulo {
   position: absolute;
   left: 55px;
-  font-family: 'Exo';
+  font-family: "Exo";
   font-weight: 700;
   font-size: 2.5em;
 }
@@ -63,8 +63,6 @@
   .Header {
     max-width: 720px;
   }
-
-  
 }
 
 @media (max-width: 840px) {
@@ -87,7 +85,7 @@
   .Logo {
     width: 100%;
   }
-  
+
   .row {
     column-gap: 20px;
   }
@@ -106,7 +104,7 @@
   border: none;
   transform: translateY(-3px);
   border-radius: 10px;
-  transition: all .5s;
+  transition: all 0.5s;
   padding: 0;
 }
 

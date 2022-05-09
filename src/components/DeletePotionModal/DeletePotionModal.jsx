@@ -1,6 +1,6 @@
 import Modal from "../modal/Modal";
 import "./DeletePotionModal.css";
-import { PotionService } from "../../services/PotionService"
+import { PotionService } from "../../services/PotionService";
 
 function DeletaPotionModal({ closeModal, potionParaDeletar, onDeletePotion }) {
   const handleDelete = async (potion) => {

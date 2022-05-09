@@ -27,11 +27,11 @@ export function Home() {
   const [canOpenBag, setCanOpenBag] = useState();
 
   const abrirSacola = async () => {
-    const lista = JSON.parse(localStorage.getItem('sacola'));
-    const sacola = lista.filter(i => i.quantidade > 0);
+    const lista = JSON.parse(localStorage.getItem("sacola"));
+    const sacola = lista.filter((i) => i.quantidade > 0);
 
     await SacolaService.create(sacola);
-    setCanOpenBag(true)
+    setCanOpenBag(true);
   };
 
   const handleActions = (action) => {
@@ -44,7 +44,7 @@ export function Home() {
   };
 
   const handleUpdatePotion = (potionToUpdate) => {
-    setPotionParaEditar(potionParaEditar);
+    setPotionParaEditar(potionToUpdate);
     setCanShowAdicionaPotionModal(true);
   };
 
@@ -90,10 +90,7 @@ export function Home() {
             onDeletePotion={(potion) => setPotionRemovida(potion)}
           />
         )}
-        {
-          canOpenBag &&
-          <SacolaModal closeModal={() => setCanOpenBag(false)} />
-        }
+        {canOpenBag && <SacolaModal closeModal={() => setCanOpenBag(false)} />}
       </div>
     </div>
   );

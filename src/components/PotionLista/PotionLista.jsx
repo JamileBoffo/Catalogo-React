@@ -34,16 +34,16 @@ function PotionLista({
   };
 
   const setSelecionadas = useCallback(() => {
-    if(!potions.length) return;
+    if (!potions.length) return;
 
     const entries = Object.entries(potionSelecionada);
-    const sacola = entries.map(arr => ({
+    const sacola = entries.map((arr) => ({
       potionId: potions[arr[0]].id,
-      quantidade: arr[1]
-    }))
+      quantidade: arr[1],
+    }));
 
-    localStorage.setItem('sacola', JSON.stringify(sacola))
-    localStorage.setItem('selecionadas', JSON.stringify(potionSelecionada))
+    localStorage.setItem("sacola", JSON.stringify(sacola));
+    localStorage.setItem("selecionadas", JSON.stringify(potionSelecionada));
   }, [potionSelecionada, potions]);
 
   const getLista = async () => {
@@ -84,8 +84,8 @@ function PotionLista({
   }, [potionEditada, potionRemovida]);
 
   useEffect(() => {
-    setSelecionadas()
-  }, [setSelecionadas, potionSelecionada])
+    setSelecionadas();
+  }, [setSelecionadas, potionSelecionada]);
   return (
     <div className="PotionLista">
       {potions.map((potion, index) => (

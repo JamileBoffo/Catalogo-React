@@ -1,5 +1,4 @@
-import children from "react";
-import Overlay from '../Overlay/Overlay'
+import Overlay from "../Overlay/Overlay";
 import "./Modal.css";
 
 function Modal({ children, closeModal }) {
