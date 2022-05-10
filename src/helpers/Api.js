@@ -22,7 +22,7 @@ const SacolaContext = {
 };
 
 export const Api = {
-  baseUrl: "https://reddragon-api.onrender.com/potions",
+  baseUrl: "https://reddragon-api.onrender.com",
   ...PotionContext,
   ...SacolaContext,
 };
